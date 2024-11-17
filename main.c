@@ -44,7 +44,7 @@ int main(){
         }
         imprimir_historiagrama(historiograma, valores, categorias);
 for(int i = 0; i < categorias; i++)
-If (historiograma[i] !=NULL)
+if (historiograma[i] !=NULL)
 free(historiograma[i]);
 
         return 0 ;
