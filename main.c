@@ -1,57 +1,29 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 
-void povoa_historiograma(char** h, int valores[], int categoria) {
-    for (int i = 0; i < valores[categoria]; i++) {
-        h[categoria][i] = '*';
-    }
-}
-
-void imprimir_historiograma(char** h, int valores[], int categorias) {
-    for (int i = 0; i < categorias; i++) {
-        printf("%d", valores[i]);
-        if (valores[i] > 0) {
-            for (int j = 0; j < valores[i]; j++) {
-                printf("%c", h[i][j]);
-            }
+void exibir_histograma(char* categorias[], int quantidades[], int total) {
+    for (int i = 0; i < total; i++) {
+        printf("%d ", quantidades[i]);
+        for (int j = 0; j < quantidades[i]; j++) {
+            printf("%c", categorias[i][j]);
         }
         printf("\n");
     }
 }
 
-int main() {
-    int categorias;
-    scanf("%d", &categorias);
-
-    if (categorias <= 0) {
-        return 0; // Termina para entradas inválidas
-    }
-
-    int valores[categorias];
-    char* historiograma[categorias];
-
-    for (int i = 0; i < categorias; i++) {
-        scanf("%d", &valores[i]);
-
-        if (valores[i] < 0) {
-            valores[i] = 0; // Tratar valores negativos como zero
-        }
-
-        if (valores[i] == 0) {
-            historiograma[i] = NULL;
-        } else {
-            historiograma[i] = (char*)malloc(valores[i] * sizeof(char));
-            povoa_historiograma(historiograma, valores, i);
+void preencher_histograma(char *categorias[], int quantidade, int indice) {
+    for (int i = 0; i < quantidade; i++) {
+        if (categorias[indice][i] >= 0) {
+            categorias[indice][i] = '*';
         }
     }
-
-    imprimir_historiograma(historiograma, valores, categorias);
-
-    for (int i = 0; i < categorias; i++) {
-        if (historiograma[i] != NULL) {
-            free(historiograma[i]);
-        }
+    if (categorias[indice][quantidade]) {
+        categorias[indice][quantidade] = '\0';
     }
-
-    return 0;
 }
+
+int main() {
+    int total_categorias;
+
+    scanf("%d",
